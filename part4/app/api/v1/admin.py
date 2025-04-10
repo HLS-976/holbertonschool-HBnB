@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 api = Namespace('admin', description='Admin operations')
 
-userAdmin_model = api.model(
+user_model = api.model(
     'User', {
         'first_name': fields.String(
             required=True, description='First name of the user'),
@@ -21,7 +21,7 @@ userAdmin_model = api.model(
 
 @api.route('/users/')
 class AdminUserCreate(Resource):
-    @api.expect(userAdmin_model, validate=True)
+    @api.expect(user_model, validate=True)
     @api.response(201, 'User successfully created')
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
