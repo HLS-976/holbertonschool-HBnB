@@ -45,7 +45,7 @@ class UserList(Resource):
         except (ValueError, TypeError) as e:
             api.abort(400, str(e))
 
-        return new_user.to_dict(), 201
+        return new_user.display(), 201
 
     @api.response(200, "Successfully retrieved user list")
     def get(self):
