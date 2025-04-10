@@ -1,23 +1,17 @@
-/* 
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks. 
-  You'll probably need to override some of theese styles.
-*/
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
     --primary-color: #f5efe6;
     --secondary-color: #D5CABC;
     --text-color: #000;
-
-
-
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Arial Narrow', Arial, sans-serif,
-
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -36,6 +30,11 @@ header {
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    height: 40px;
 }
 
 nav a {
@@ -43,6 +42,10 @@ nav a {
     text-decoration: none;
     margin-left: 1rem;
     padding: 0 10px;
+}
+
+nav a:hover {
+    color: #C49D83;
 }
 
 main {
@@ -54,27 +57,130 @@ main {
 
 #filter {
     margin: 20px;
-    padding: 10Px;
+    padding: 10px;
     border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+#price-filter {
+    width: 80%;
+    margin-top: 10px;
+}
+
+#price-filter > select {
     border-radius: 10px;
 }
 
-#place-list {
+#places-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .place-card, .review-card {
     margin: 20px;
-    padding: 10Px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     background: var(--primary-color);
-    width: 350px;
-    height: 350px;
+    flex: 1 1 calc(33.333% - 40px);
+    max-width: calc(33.333% - 40px);
 }
+
+.place-info {
+    margin-top: 10px;
+}
+
+.add-review {
+    margin: 40px 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: var(--secondary-color);
+}
+
+.add-review h2 {
+    margin-bottom: 10px;
+}
+
+form.form textarea,
+form.form select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+form.form button {
+    padding: 8px 16px;
+    background-color: #C49D83;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form.form button:hover {
+    background-color: #b3866b;
+}
+
 
 footer {
     background: var(--primary-color);
     padding: 1rem;
     text-align: center;
+}
+
+/* Divide section layout for place details and reviews */
+.divide-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 2rem;
+}
+
+.place-details, #reviews {
+    background: var(--primary-color);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1 1 48%;
+    min-width: 300px;
+}
+
+.place-details h1 {
+    margin-bottom: 10px;
+}
+
+#reviews h2 {
+    margin-bottom: 15px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .place-card, .review-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    #filter {
+        width: 100%;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .divide-section {
+        flex-direction: column;
+    }
+
+    .place-details, #reviews {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
 }
