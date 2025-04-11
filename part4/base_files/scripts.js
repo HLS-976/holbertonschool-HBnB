@@ -35,13 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkAuthentication() {
     const token = getCookie('token');
     const loginLink = document.getElementById('login-link');
+    const filterSelector = document.getElementById('filter')
 
     if (!loginLink) return;
 
     if (!token) {
       loginLink.style.display = 'inline';
+      filterSelector.style.display = 'none'
     } else {
       loginLink.style.display = 'none';
+      filterSelector.style.display = 'block'
       fetchPlaces(token);
     }
   }
@@ -133,5 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
   });
+
+  
+  function getPlaceIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+  }
 
 });
