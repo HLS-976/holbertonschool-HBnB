@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!token) {
       loginLink.style.display = 'inline';
       filterSelector.style.display = 'none'
+      fetchPlaces();
     } else {
       loginLink.style.display = 'none';
       filterSelector.style.display = 'block'
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   checkAuthentication();
 
-  async function fetchPlaces(token) {
+  async function fetchPlaces(token = null) {
     try {
         const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
             method: 'GET',
@@ -106,15 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
       placeCard.className = 'place-card';
   
       placeCard.innerHTML = `
-        <img src="${imageUrl}" alt="place image" class="place-image">
-        <h3 class="title-card">${place.title}</h3>
-        <p class="space-card">Price: ${place.price} €</p>
-        <p class="space-card">Latitude: ${place.latitude}</p>
-        <p class="space-card">Longitude: ${place.longitude}</p>
-        <a href="place.html?id=${place.id}">
-          <button class="details-button">View Details</button>
-        </a>
+      <img src="${imageUrl}" alt="place image" class="place-image">
+      <h3 class="title-card">${place.title}</h3>
+      <p class="price-card"><strong>Price:</strong> ${place.price} €</p>
+      <p class="desc-card">${place.description}</p>
+      <p class="coord-card">📍 ${place.latitude}, ${place.longitude}</p>
+      <a href="place.html?id=${place.id}">
+        <button class="details-button">View Details</button>
+      </a>
       `;
+    
   
       placeList.appendChild(placeCard);
     });
