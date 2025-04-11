@@ -1,6 +1,6 @@
 import uuid
 from app import db
-from app.models.base_class import Baseclass
+from part4.app.models.basemodel import Baseclass
 from sqlalchemy.orm import relationship, validates
 from app.models.place_amenity import place_amenity
 from sqlalchemy import Column, String, Float, Integer, ForeignKey
