@@ -98,12 +98,65 @@ main {
     margin-bottom: 10px;
 }
 
+.title-card {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2a2a2a;
+    margin-bottom: 8px;
+}
+  
+.price-card {
+    font-size: 16px;
+    font-weight: 600;
+    color: #C49D83;
+    margin-bottom: 5px;
+}
+  
+.desc-card {
+    margin: 8px 0;
+    font-size: 14px;
+    font-style: italic;
+    color: #444;
+    line-height: 1.5;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+  
+.coord-card {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.details-button {
+    background-color: #C49D83;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+  
+.details-button:hover {
+    background-color: #b07c63;
+    transform: translateY(-2px);
+}
+  
+.details-button:active {
+    transform: scale(0.98);
+}
+  
+  
 
 .place-info {
     margin-top: 10px;
 }
 
-.add-review {
+#add-review {
     margin: 40px 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -111,7 +164,7 @@ main {
     background: var(--secondary-color);
 }
 
-.add-review h2 {
+#add-review h2 {
     margin-bottom: 10px;
 }
 
@@ -151,7 +204,7 @@ footer {
     margin-bottom: 2rem;
 }
 
-.place-details, #reviews {
+#place-details, #reviews {
     background: var(--primary-color);
     padding: 20px;
     border: 1px solid #ddd;
@@ -168,6 +221,131 @@ footer {
 #reviews h2 {
     margin-bottom: 15px;
 }
+
+.detail-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Styles pour les détails de place (section détaillée) --- */
+
+.info-container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    /* border-radius: 12px; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+    font-size: 17px;
+    line-height: 1.6;
+}
+  
+.info-label {
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    margin-right: 10px;
+    min-width: 120px;
+}
+
+#place-details {
+    background-color: #ffffff;
+}
+
+#place-details.full-width .detail-image {
+    max-height: none;
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#place-details.full-width .info-container {
+  font-size: 20px;
+}
+
+#place-details.full-width h2 {
+  font-size: 32px;
+}
+
+#place-details.full-width p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+#place-details h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #333;
+}
+  
+  /* --- Style des cartes de review --- */
+  
+.review-card {
+    background-color: #f0f4f8;
+    padding: 15px;
+    margin-top: 10px;
+    border-left: 5px solid #C49D83;
+    border-radius: 8px;
+}
+  
+.review-card p {
+    margin-bottom: 5px;
+}
+
+#add-review {
+  background-color: var(--secondary-color);
+  padding: 20px;
+  margin: 40px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#add-review h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+#review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#review-form label {
+  font-weight: 600;
+  color: #222;
+}
+
+#review-form textarea,
+#review-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: vertical;
+}
+
+#review-form button {
+  width: fit-content;
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #C49D83;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#review-form button:hover {
+  background-color: #b07b63;
+}
+  
 
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
