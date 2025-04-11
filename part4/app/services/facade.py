@@ -10,7 +10,7 @@ class HBnBFacade:
         self.user_repo = UserRepository()
         self.review_repo = ReviewRepository()
         self.amenity_repo = AmenityRepository()
-        self.place_repository = PlaceRepository()
+        self.place_repo = PlaceRepository()
 
     # User methods
     def create_user(self, user_data):
@@ -48,6 +48,9 @@ class HBnBFacade:
 
     def get_place(self, place_id):
         return self.place_repo.get(place_id)
+    
+    def get_all_places(self):
+        return self.place_repo.get_all()
 
     def update_place(self, place_id, place_data):
         return self.place_repo.update(place_id, place_data)
