@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Place Details</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="images/icon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Details</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -13,63 +12,43 @@
     <img src="images/logo.png" alt="Application Logo" class="logo" />
     <nav>
       <a href="index.html">Home</a>
-      <a href="login.html" class="login-button">Login</a>
+      <a href="login.html" class="login-link" id="login-link">Login</a>
     </nav>
   </header>
 
-  <main>
-    <div class="divide-section">
-        <section class="place-details">
-            <div class="place-info">
-              <h1>Charming Studio</h1>
-              <p><strong>Host:</strong> Alice Smith</p>
-              <p><strong>Price per night:</strong> £50</p>
-              <p><strong>Description:</strong> Cozy studio with modern decor, close to city center.</p>
-              <p><strong>Amenities:</strong> WiFi, Kitchen, Heating, TV</p>
-            </div>
-          </section>
+    <main>
+      <div class="divide-section">
+        <section id="place-details">
+          <!-- Place details will be populated dynamically -->
+        </section>
+        <section id="reviews">
+          <!-- Reviews will be populated dynamically -->
+        </section>
+      </div>
+      <section id="add-review">
+        <h2>Add a Review</h2>
+        <form id="review-form">
+          <label for="review-text">Review:</label>
+          <textarea id="review-text" name="review-text" required></textarea>
       
-          <section id="reviews">
-            <h2>Reviews</h2>
-            <div class="review-card">
-              <p><strong>User:</strong> JohnDoe</p>
-              <p><strong>Rating:</strong> ★★★★☆</p>
-              <p>"Had a great stay. Very clean and central!"</p>
-            </div>
-            <div class="review-card">
-              <p><strong>User:</strong> JaneSmith</p>
-              <p><strong>Rating:</strong> ★★★★★</p>
-              <p>"Perfect for a weekend getaway. Highly recommend!"</p>
-            </div>
-          </section>
-    </div>
+          <label for="review-rating">Rating:</label>
+          <select id="review-rating" name="review-rating" required>
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 ★</option>
+            <option value="2">2 ★★</option>
+            <option value="3">3 ★★★</option>
+            <option value="4">4 ★★★★</option>
+            <option value="5">5 ★★★★★</option>
+          </select>
+      
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
 
-    <!-- Show this section only if user is logged in -->
-    <section class="add-review">
-      <h2>Add a Review</h2>
-      <form id="review-form" class="form">
-        <label for="review-text">Review:</label>
-        <textarea id="review-text" name="review-text" required></textarea>
-
-        <label for="rating">Rating:</label>
-        <select id="rating" name="rating" required>
-          <option value="">--Select--</option>
-          <option value="5">★★★★★</option>
-          <option value="4">★★★★☆</option>
-          <option value="3">★★★☆☆</option>
-          <option value="2">★★☆☆☆</option>
-          <option value="1">★☆☆☆☆</option>
-        </select>
-
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 hbnb evolution. All rights reserved.</p>
-  </footer>
-
-  <script src="scripts.js"></script>
+    <footer>
+      <p>&copy; 2025 hbnb evolution. All rights reserved.</p>
+    </footer>
+    <script src="js_files/place.js"></script>
 </body>
 </html>
