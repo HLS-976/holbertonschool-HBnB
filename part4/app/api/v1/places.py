@@ -133,3 +133,4 @@ class PlaceResource(Resource):
             api.abort(400, str(e))
         
         return {"message": "Place updated successfully"}, 200
+
