@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const data = await response.json();
-        console.log("Connexion réussie");
         document.cookie = `token=${data.access_token}; path=/`;
         window.location.replace('index.html');
       } catch (error) {
@@ -35,17 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkAuthentication() {
     const token = getCookie('token');
     const loginLink = document.getElementById('login-link');
-    const filterSelector = document.getElementById('filter')
+    const logoutButton = document.getElementById('logout-button');
+    const filterSelector = document.getElementById('filter');
 
-    if (!loginLink) return;
+    if (!loginLink || !logoutButton || !filterSelector) return;
 
     if (!token) {
       loginLink.style.display = 'inline';
-      filterSelector.style.display = 'none'
+      logoutButton.style.display = 'none';
+      filterSelector.style.display = 'none';
       fetchPlaces();
     } else {
       loginLink.style.display = 'none';
-      filterSelector.style.display = 'block'
+      logoutButton.style.display = 'inline';
+      filterSelector.style.display = 'block';
       fetchPlaces(token);
     }
   }
@@ -59,30 +61,39 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      sessionStorage.removeItem('wasLoggedIn');
+      window.location.href = "login.html";
+    });
+  }
+
   checkAuthentication();
 
   async function fetchPlaces(token = null) {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // Ajout du token JWT dans l'en-tête Authorization
-                'Authorization': `Bearer ${token}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+      const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` })
         }
+      });
 
-        const places = await response.json();
-        displayPlaces(places); // Appelle la fonction pour afficher les données
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const places = await response.json();
+      displayPlaces(places);
     } catch (error) {
-        console.error('Failed to fetch places:', error);
+      console.error('Failed to fetch places:', error);
     }
   }
-  
+
   const placeImages = [
     "images/appartments/appartement-blanc.jpg",
     "images/appartments/appartement-chaleureux.jpg",
@@ -97,46 +108,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displayPlaces(places) {
     const placeList = document.getElementById('places-list');
-    placeList.innerHTML = ''; // On vide le contenu précédent
-  
+    placeList.innerHTML = '';
+
     places.forEach((place, index) => {
       const imageIndex = index % placeImages.length;
       const imageUrl = placeImages[imageIndex];
-  
+
       const placeCard = document.createElement('div');
       placeCard.className = 'place-card';
-  
+
       placeCard.innerHTML = `
-      <img src="${imageUrl}" alt="place image" class="place-image">
-      <h3 class="title-card">${place.title}</h3>
-      <p class="price-card"><strong>Price:</strong> ${place.price} €</p>
-      <p class="desc-card">${place.description}</p>
-      <p class="coord-card">📍 ${place.latitude}, ${place.longitude}</p>
-      <a href="place.html?id=${place.id}">
-        <button class="details-button">View Details</button>
-      </a>
+        <img src="${imageUrl}" alt="place image" class="place-image">
+        <h3 class="title-card">${place.title}</h3>
+        <p class="price-card"><strong>Price:</strong> ${place.price} €</p>
+        <p class="desc-card">${place.description}</p>
+        <p class="coord-card">📍 ${place.latitude}, ${place.longitude}</p>
+        <a href="place.html?id=${place.id}">
+          <button class="details-button">View Details</button>
+        </a>
       `;
-    
-  
+
       placeList.appendChild(placeCard);
     });
   }
-  
 
-  document.getElementById('price-filter').addEventListener('change', (event) => {
-    const selectedValue = event.target.value;
-    const places = document.querySelectorAll('.place-card');
+  const priceFilter = document.getElementById('price-filter');
+  if (priceFilter) {
+    priceFilter.addEventListener('change', (event) => {
+      const selectedValue = event.target.value;
+      const places = document.querySelectorAll('.place-card');
 
-    places.forEach(card => {
+      places.forEach(card => {
         const priceText = card.querySelector('p').textContent;
         const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
 
         if (selectedValue === 'all' || price <= parseFloat(selectedValue)) {
-            card.style.display = 'block';
+          card.style.display = 'block';
         } else {
-            card.style.display = 'none';
+          card.style.display = 'none';
         }
+      });
     });
-  });
-
+  }
 });

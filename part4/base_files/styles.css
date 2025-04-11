@@ -410,6 +410,30 @@ footer {
 #login-form button:hover {
   background-color: #b3866b;
 }
+
+
+#logout-button {
+  background-color: transparent;
+  color: #C49D83;
+  padding: 8px 16px;
+  border: 2px solid #C49D83;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+#logout-button:hover {
+  background-color: #C49D83;
+  color: white;
+  transform: translateY(-2px);
+}
+
+#logout-button:active {
+  transform: scale(0.97);
+}
   
 
 /* Mobile Responsive */
