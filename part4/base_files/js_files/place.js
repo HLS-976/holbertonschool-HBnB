@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
           ...(token && { 'Authorization': `Bearer ${token}` })
         }
       })
-      .then(response => {
-        if (!response.ok) throw new Error(`Failed to fetch details`);
-        return response.json();
-      })
-      .then(data => displayPlaceDetails(data))
-      .catch(error => console.error('Error fetching place:', error));
+        .then(response => {
+          if (!response.ok) throw new Error(`Failed to fetch details`);
+          return response.json();
+        })
+        .then(data => displayPlaceDetails(data))
+        .catch(error => console.error('Error fetching place:', error));
     }
   
     function displayPlaceDetails(place) {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (place.reviews.length === 0) {
         const reviewSection = document.getElementById('reviews');
         const detailSection = document.getElementById('place-details');
-        reviewSection.style.display = 'none';
+        // reviewSection.style.display = 'none';
         detailSection.classList.add('full-width');
       } else {
         place.reviews.forEach(review => {
@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-              text: reviewText,
-              rating: parseInt(rating),
-              place_id: placeId
+            text: reviewText,
+            rating: parseInt(rating),
+            place_id: placeId
           })
         });
   
