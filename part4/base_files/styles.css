@@ -347,7 +347,7 @@ footer {
 }
 
 /* Style pour la page de connexion */
-#review-page {
+.centered {
   display: flex;
   justify-content: center;
   align-items: center;
