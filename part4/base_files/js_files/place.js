@@ -52,15 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const amenityList = place.amenities?.map(a => a.name).join(', ') || 'None';
     amenities.innerHTML = `<strong>Amenities:</strong> ${amenityList}`;
 
-    const reviewsTitle = document.createElement('h3');
-    reviewsTitle.textContent = 'Reviews:';
+    const reviewSection = document.getElementById('reviews');
+    const reviewDiv = document.getElementById('reviews-container');
+    const placeDetailsSection = document.getElementById('place-details');
+    const mainPage = document.getElementById('review-page');
+    reviewDiv.innerHTML = '';
 
-    const reviewsContainer = document.createElement('div');
-    if (place.reviews.length === 0) {
-      const reviewSection = document.getElementById('reviews');
-      const detailSection = document.getElementById('place-details');
-      detailSection.classList.add('full-width');
-    } else {
+    if (place.reviews.length > 0) {
+      reviewSection.style.display = 'block';
       place.reviews.forEach(review => {
         const reviewCard = document.createElement('div');
         reviewCard.className = 'review-card';
@@ -68,8 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <p><strong>Rating:</strong> ${review.rating} ★</p>
           <p>${review.text}</p>
         `;
-        reviewsContainer.appendChild(reviewCard);
+        reviewDiv.appendChild(reviewCard);
       });
+      placeDetailsSection.classList.remove('centered');
+      mainPage.classList.remove('centered');
+    } else {
+      reviewSection.style.display = 'none';
+      mainPage.classList.add('centered');
+      placeDetailsSection.classList.add('centered');
     }
 
     container.appendChild(image);
@@ -77,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(description);
     container.appendChild(price);
     container.appendChild(amenities);
-    container.appendChild(reviewsTitle);
-    container.appendChild(reviewsContainer);
 
     placeDetails.appendChild(container);
   }
@@ -108,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Review submitted successfully!');
       document.getElementById('review-form').reset();
 
-      const reviewsContainer = document.querySelector('#place-details .info-container div');
+      const reviewsContainer = document.getElementById('reviews-container');
       const reviewCard = document.createElement('div');
       reviewCard.className = 'review-card';
       reviewCard.innerHTML = `
@@ -119,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const reviewSection = document.getElementById('reviews');
       reviewSection.style.display = 'block';
-      document.getElementById('place-details').classList.remove('full-width');
+      document.getElementById('place-details').classList.remove('centered');
     } catch (error) {
       console.error('Error submitting review:', error);
       alert(`Error: ${error.message}`);
